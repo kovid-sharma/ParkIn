@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "607599265434",
+    "project_id": "parkin-e5423",
+    "storage_bucket": "parkin-e5423.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607599265434:android:26b208c69e380764b98123",
+        "android_client_info": {
+          "package_name": "com.parkin.user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9Er-YR4vFN9ixDz1k0bi40u52RBaQ7XA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
