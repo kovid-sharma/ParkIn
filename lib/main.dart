@@ -5,7 +5,9 @@ import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:parkin/constants/colors.dart';
-import 'package:parkin/screens/auth/signup.dart';
+import 'package:parkin/screens/auth/homescreen.dart';
+import 'package:parkin/screens/parkin/signup.dart';
+import 'package:parkin/screens/parkin/signupin.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -87,8 +89,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void NavigateFromSplash() async{
-    await Future.delayed(Duration(seconds: 4));
-    Get.off(()=>Obx(() => !authController.isAuth.value ? SignUp() : const Home()),);
+    await Future.delayed(const Duration(milliseconds: 1));
+    Get.off(()=>Obx(() => authController.isAuth.value ? CommonAuthScreen() : const HomeScreen()),);
   }
 }
 

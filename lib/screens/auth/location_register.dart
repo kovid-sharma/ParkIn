@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/colors.dart';
+import '../../controller/location_controller.dart';
 import '../../widgets/custom_icon.dart';
 class LocRegister extends StatefulWidget {
   const LocRegister({Key? key}) : super(key: key);
@@ -11,6 +14,8 @@ class LocRegister extends StatefulWidget {
 }
 
 class _LocRegisterState extends State<LocRegister> {
+  var locController = Get.put(LocController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,28 +31,239 @@ class _LocRegisterState extends State<LocRegister> {
               child: CustomIcon(repeat:false),
             ),
           ),
-          Center(
-            child: Container(
-              height: 48,
-              width: 88.w,
-              decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.circular(30)),
-              child: const TextField(
-                showCursor: false,
-                decoration: InputDecoration(
-                    hintText: "Search parking locations",
-                    hintStyle: TextStyle(fontSize: 13, color: Colors.black45),
-                    contentPadding: EdgeInsets.only(left: 10, top: 11),
-                    prefixIcon: Icon(
-                      Icons.search_outlined,
-                      color: Colors.black45,
-                      size: 35,
-                    ),
-                    border: InputBorder.none),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 30.0,bottom: 5),
+                child: Text('Parking Lot Name',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Colors.black
+                  ),
+                ),
               ),
-            ),
+              Center(
+                child: Container(
+                  height: 48,
+                  width: 88.w,
+                  decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: const TextField(
+                    showCursor: false,
+                    decoration: InputDecoration(
+                        hintText: "Aman's Parking",
+                        hintStyle: TextStyle(fontSize: 13, color: Colors.black45),
+                        contentPadding: EdgeInsets.only(left: 12, top: 1),
+                        border: InputBorder.none),
+                  ),
+                ),
+              ),
+            ],
           ),
+          SizedBox(height: 3.h,),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 30.0,bottom: 5),
+                child: Text('Name',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Colors.black
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  height: 48,
+                  width: 88.w,
+                  decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: const TextField(
+                    showCursor: false,
+                    decoration: InputDecoration(
+                        hintText: "Aman Kulkarni",
+                        hintStyle: TextStyle(fontSize: 13, color: Colors.black45),
+                        contentPadding: EdgeInsets.only(left: 12, top: 1),
+                        border: InputBorder.none),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 3.h,),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 30.0,bottom: 5),
+                child: Text('Max Capacity',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Colors.black
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  height: 48,
+                  width: 88.w,
+                  decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: TapRegion(
+                    onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                    child: const TextField(
+                     // keyboardType:  TextInputType.numberWithOptions(signed: true, decimal: true),
+                      keyboardType: TextInputType.number,
+                      showCursor: false,
+                      decoration: InputDecoration(
+                          hintText: "250",
+                          hintStyle: TextStyle(fontSize: 13, color: Colors.black45),
+                          contentPadding: EdgeInsets.only(left: 12, top: 1),
+                          border: InputBorder.none),
+                    ),
+                  ),
+                ),
+              ),
+
+            ],
+          ),
+          SizedBox(height: 3.h,),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 30.0,bottom: 5),
+                child: Tooltip(
+                  triggerMode: TooltipTriggerMode.tap,
+                  message: "Add your parking location or open map",
+                  child: Text('Add your Address',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: Colors.black
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  height: 48,
+                  width: 88.w,
+                  decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: TapRegion(
+                    onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                    child: const TextField(
+                      keyboardType: TextInputType.text,
+                      showCursor: false,
+                      decoration: InputDecoration(
+                          hintText: "Choose on map",
+                          hintStyle: TextStyle(fontSize: 13, color: Colors.black45),
+                          contentPadding: EdgeInsets.only(left: 12, top: 1),
+                          border: InputBorder.none),
+                    ),
+                  ),
+                ),
+              ),
+
+            ],
+          ),
+          SizedBox(height: 3.h,),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 30.0,bottom: 5),
+                child: Text('Landmarks',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Colors.black
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  height: 48,
+                  width: 88.w,
+                  decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: TapRegion(
+                    onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                    child: const TextField(
+                      // keyboardType:  TextInputType.numberWithOptions(signed: true, decimal: true),
+                      keyboardType: TextInputType.text,
+                      showCursor: false,
+                      decoration: InputDecoration(
+                          hintText: "(optional)",
+                          hintStyle: TextStyle(fontSize: 13, color: Colors.black45),
+                          contentPadding: EdgeInsets.only(left: 12, top: 1),
+                          border: InputBorder.none),
+                    ),
+                  ),
+                ),
+              ),
+
+            ],
+          ),
+
+          Expanded(child: SizedBox()),
+          Column(
+            children: [
+              Center(
+                child: ElevatedButton(
+                  style:ButtonStyle(
+                    shape: MaterialStateProperty.resolveWith((states){
+                        return RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        );
+                    },
+                    ),
+                    side: MaterialStateProperty.resolveWith((states){
+                      if(states.contains(MaterialState.pressed))
+                        {
+                          return const BorderSide(color: Colors.green);
+                        }
+                      return BorderSide(color: redLightColor);
+                    }
+
+                    ),
+
+                    backgroundColor: MaterialStateProperty.resolveWith((states) {
+                      if (states.contains(MaterialState.pressed)) {
+                        return Colors.green;
+                      }
+                      return Color(0xffff2a2a);
+                    }),
+
+                  ),
+
+                    onPressed: ()
+                    {
+
+                    }, child:
+                 const Text('Submit',
+                     style: TextStyle(
+                       color: Colors.white
+                     ),
+                ),
+              )
+              )
+
+            ],
+          ),
+          const Expanded(child: SizedBox()),
+         const Expanded(child: SizedBox()),
 
         ],
       ),

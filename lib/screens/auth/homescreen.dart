@@ -5,14 +5,14 @@ import 'package:parkin/screens/auth/location_register.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../widgets/custom_icon.dart';
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

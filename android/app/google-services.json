@@ -12,7 +12,20 @@
           "package_name": "com.parkin.user"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "607599265434-vs957q9hhkkhatl9fo24ft3uc6p87k79.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.parkin.user",
+            "certificate_hash": "922de8dc9737617a9927a1f50ed6f7c30236f643"
+          }
+        },
+        {
+          "client_id": "607599265434-6751ul5kk2d1ne3k2ns39j4du6l219mp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD9Er-YR4vFN9ixDz1k0bi40u52RBaQ7XA"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607599265434-6751ul5kk2d1ne3k2ns39j4du6l219mp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "607599265434-2danrh8o9gdm4c9382u2m4fn1m9tq9a0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.parkin"
+              }
+            }
+          ]
         }
       }
     }
