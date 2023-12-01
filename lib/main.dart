@@ -89,8 +89,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void NavigateFromSplash() async{
-    await Future.delayed(const Duration(milliseconds: 1));
-    Get.off(()=>Obx(() => authController.isAuth.value ? CommonAuthScreen() : const HomeScreen()),);
+    await Future.delayed(const Duration(milliseconds: 4000));
+    Get.off(()=>Obx(() => !authController.isAuth.value ? CommonAuthScreen() : const HomeScreen()),);
   }
 }
 
