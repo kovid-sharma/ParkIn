@@ -77,6 +77,7 @@ class _BookingScreenState extends State<BookingScreen> {
                       await locationsCollection.doc(fieldValue.toString()).update({
                         'selectedSeats': FieldValue.arrayUnion([newSeat]),
                       });
+                      jwt.selSEATS.add("${widget.add} $rowIndex $colIndex");
 
                       showDialog(
                         context: context,
@@ -147,10 +148,10 @@ class _BookingScreenState extends State<BookingScreen> {
                   onPressed: ()
                   {
 
-                    CustomSnackbar.showSucess('Please choose your seat');
+                    CustomSnackbar.showSucess('Please choose your space');
 
                   }, child:
-                const Text('Choose your seat',
+                const Text('Choose your space',
                   style: TextStyle(
                       color: Colors.white
                   ),

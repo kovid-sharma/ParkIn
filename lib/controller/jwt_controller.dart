@@ -18,6 +18,9 @@ class JWTController extends GetxController{
   RxBool isSpaceRegistered=false.obs;
   RxInt firstTimeTap=0.obs;
   RxInt bookedSeat=0.obs;
+
+  RxList selSEATS= [].obs;
+
   RxInt rows=10.obs;
   RxInt cols=10.obs;
   var hiveBox = Hive.box("secrets");

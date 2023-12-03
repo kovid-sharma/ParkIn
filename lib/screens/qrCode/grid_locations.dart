@@ -101,7 +101,7 @@ class LocationsScreen extends StatelessWidget {
                 icon: Icon(Icons.qr_code,size: 20,),
                 onPressed: ()
                 {
-                  Get.to(()=>QrEntryPage());
+                  Get.off(()=>QrEntryPage(r:location.rows,c:location.cols,seats: seats,add: location.address,));
                 },
               ),
             ),

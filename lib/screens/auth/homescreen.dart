@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parkin/constants/colors.dart';
+import 'package:parkin/constants/snackbar.dart';
 import 'package:parkin/screens/auth/location_register.dart';
 import 'package:parkin/screens/qrCode/grid_locations.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../controller/jwt_controller.dart';
 import '../../widgets/custom_icon.dart';
+import '../qrCode/exit_qr.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -19,6 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: authController.bookedSeat.value!=0? CuteFloatingActionButton():
+          Container(),
+
       resizeToAvoidBottomInset: false,
       backgroundColor: backLightColor,
       body: Column(
@@ -58,7 +64,11 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                   color: white,
                   borderRadius: BorderRadius.circular(30)),
-              child: const TextField(
+              child: TextField(
+                onEditingComplete: ()
+                {
+                  CustomSnackbar.showSucess('The Searched String is not available in our Landmarks');
+                },
                 showCursor: false,
                 decoration: InputDecoration(
                     hintText: "Search parking locations",
@@ -203,6 +213,29 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const Expanded(child: SizedBox()),
+        ],
+      ),
+    );
+  }
+}
+class CuteFloatingActionButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: Colors.red,
+      onPressed: () {
+        Get.to(()=>ExitQRScreen());
+      },
+      tooltip: 'Exit QR',
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.qr_code, size: 24.0, color: Colors.white),
+          SizedBox(height: 8.0),
+          Text(
+            'Exit QR',
+            style: TextStyle(fontSize: 10.0, color: Colors.white),
+          ),
         ],
       ),
     );
