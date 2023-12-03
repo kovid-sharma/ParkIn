@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import 'package:parkin/screens/parkin/signupin.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sizer/sizer.dart';
 
+import 'constants/model/models.dart';
 import 'controller/jwt_controller.dart';
 import 'firebase_options.dart';
 
@@ -92,6 +94,38 @@ class _HomePageState extends State<HomePage> {
   }
 
   void NavigateFromSplash() async{
+    // Location location = Location(
+    //   lotName: 'udaipur',
+    //   name: 'udr Parking',
+    //   maxCapacity: 84,
+    //   rows: 12,
+    //   cols: 7,
+    //   latitude: 22.761,
+    //   longitude: 88.2300,
+    //   address: 'udr',
+    //   selectedSeats: [
+    //
+    //
+    //   ], image: 'https://picsum.photos/201',
+    // );
+    //
+    //  FirebaseFirestore.instance.collection('Locations').add(location.toMap()).then((DocumentReference<Map<String, dynamic>> documentReference)async {
+    //   String auto = documentReference.id;
+    //   CollectionReference documentsCollection = FirebaseFirestore.instance.collection('Documents');
+    //
+    //   // Set the custom document ID and add the document to Firestore
+    //   await documentsCollection.doc('udr').set({
+    //     'your_field_name': auto,
+    //     // Add more fields as needed
+    //   });
+    //
+    //  }
+    //  );
+
+
+
+
+
     await Future.delayed(const Duration(milliseconds: 4000));
     Get.off(()=>Obx(() => !authController.isAuth.value ? CommonAuthScreen() : const HomeScreen()),);
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:parkin/constants/colors.dart';
+import 'package:parkin/controller/jwt_controller.dart';
 import 'package:sizer/sizer.dart';
 
 import '../constants/model/models.dart';
@@ -19,6 +20,7 @@ class SvgConfirmScreen extends StatefulWidget {
 
 class _SvgConfirmScreenState extends State<SvgConfirmScreen> {
   final locController= Get.put(LocController());
+  final jwt= Get.put(JWTController(),permanent: true);
   @override
   void initState()
   {
@@ -87,6 +89,7 @@ class _SvgConfirmScreenState extends State<SvgConfirmScreen> {
     );
 
     FirebaseFirestore.instance.collection('PendingLocations').add(pendingLocation.toMap());
+    jwt.isSpaceRegistered.value=true;
     await Future.delayed(const Duration(milliseconds: 8000));
     Get.offAll(()=> HomeScreen());
   }

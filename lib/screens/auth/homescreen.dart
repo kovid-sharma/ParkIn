@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parkin/constants/colors.dart';
 import 'package:parkin/screens/auth/location_register.dart';
+import 'package:parkin/screens/qrCode/grid_locations.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../controller/jwt_controller.dart';
@@ -85,15 +86,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-             Padding(
-                padding: EdgeInsets.only(right: 30),
-                child: Text('See all',
-                  style: TextStyle(
-                      fontSize: 14,
-                    color: redColor,
+             GestureDetector(
+               onTap: ()
+               {
+                 Get.to(()=>LocationsScreen());
+               },
+               child: Padding(
+                  padding: EdgeInsets.only(right: 30),
+                  child: Text('See all',
+                    style: TextStyle(
+                        fontSize: 14,
+                      color: redColor,
+                    ),
                   ),
                 ),
-              ),
+             ),
             ],
           ),
           SizedBox(height: 2.h,),
