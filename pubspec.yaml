@@ -49,6 +49,8 @@ dependencies:
   cloud_firestore: ^4.13.3
   geolocator: ^10.1.0
   book_my_seat: ^1.0.1
+  flutter_svg: ^1.1.6
+  geocoding: ^2.1.1
 
 
 dev_dependencies:
@@ -82,6 +84,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

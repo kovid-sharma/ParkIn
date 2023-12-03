@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/colors.dart';
+import '../../constants/snackbar.dart';
 import '../../controller/location_controller.dart';
 import '../../widgets/custom_icon.dart';
 import 'grid_showAND_loc_screen.dart';
@@ -51,7 +52,8 @@ class _LocRegisterState extends State<LocRegister> {
                     decoration: BoxDecoration(
                         color: white,
                         borderRadius: BorderRadius.circular(30)),
-                    child: const TextField(
+                    child: TextField(
+                      controller: locController.lotName,
                       showCursor: false,
                       decoration: InputDecoration(
                           hintText: "Aman's Parking",
@@ -84,7 +86,8 @@ class _LocRegisterState extends State<LocRegister> {
                     decoration: BoxDecoration(
                         color: white,
                         borderRadius: BorderRadius.circular(30)),
-                    child: const TextField(
+                    child: TextField(
+                      controller: locController.name,
                       showCursor: false,
                       decoration: InputDecoration(
                           hintText: "Aman Kulkarni",
@@ -119,7 +122,8 @@ class _LocRegisterState extends State<LocRegister> {
                         borderRadius: BorderRadius.circular(30)),
                     child: TapRegion(
                       onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                      child: const TextField(
+                      child: TextField(
+                        controller: locController.mCapa,
                        // keyboardType:  TextInputType.numberWithOptions(signed: true, decimal: true),
                         keyboardType: TextInputType.number,
                         showCursor: false,
@@ -165,7 +169,8 @@ class _LocRegisterState extends State<LocRegister> {
                             borderRadius: BorderRadius.circular(30)),
                         child: TapRegion(
                           onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                          child: const TextField(
+                          child: TextField(
+                            controller: locController.rowsss,
                             // keyboardType:  TextInputType.numberWithOptions(signed: true, decimal: true),
                             keyboardType: TextInputType.number,
                             showCursor: false,
@@ -208,7 +213,8 @@ class _LocRegisterState extends State<LocRegister> {
                             borderRadius: BorderRadius.circular(30)),
                         child: TapRegion(
                           onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                          child: const TextField(
+                          child: TextField(
+                            controller: locController.colsss,
                             // keyboardType:  TextInputType.numberWithOptions(signed: true, decimal: true),
                             keyboardType: TextInputType.number,
                             showCursor: false,
@@ -301,7 +307,21 @@ class _LocRegisterState extends State<LocRegister> {
       
                       onPressed: ()
                       {
+                        if (locController.name.text.isEmpty) {
+                          CustomSnackbar.showFailure("Please enter user name ");
+                        } else if (locController.lotName.text.isEmpty) {
+                          CustomSnackbar.showFailure("Please enter correctlot name ");
+                        } else if(locController.rowsss.text.isEmpty || locController.colsss.text.isEmpty)
+                          {
+                            CustomSnackbar.showFailure('Please enter rows and columns before we build your parking layout');
+                          }
+                          else {
+                            locController.createSeatArray(int.parse(locController.rowsss.text), int.parse(locController.colsss.text));
+
                           Get.to(()=>GridAndLoc());
+
+                        }
+
                       }, child:
                    const Text('Continue',
                        style: TextStyle(
