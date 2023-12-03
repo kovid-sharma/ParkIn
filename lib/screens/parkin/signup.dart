@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:parkin/controller/authcontroller.dart';
 import 'package:parkin/controller/jwt_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:parkin/main.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/custom_text_field.dart';
@@ -21,8 +22,8 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
-  final _firebaseAuth = FirebaseAuth.instance;
-
+  final auth = FirebaseAuth.instance;
+  User? user;
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
@@ -34,8 +35,30 @@ class _SignUpState extends State<SignUp> {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
     debugPrint(googleUser?.email);
     if (googleUser != null) {
-      final GoogleSignInAuthentication googleAuth = await googleUser
-          .authentication;
+      try {
+        final GoogleSignInAuthentication googleSignInAuthentication = await googleUser
+            .authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        final UserCredential userCredential =
+        await auth.signInWithCredential(credential);
+
+        user = userCredential.user;
+        await hiveBox.put('Name',googleUser.displayName.toString());
+        await hiveBox.put("userId", authController.emailController.text);
+       CustomSnackbar.showSucess("Signing you UP!");
+       authController.isAuth.value=true;
+       Get.offAll(()=>HomePage());
+      }
+      catch(e)
+    {
+      debugPrint(e.toString());
+      CustomSnackbar.showFailure(e.toString());
+    }
       authController.appleRegister(
           googleUser.email, googleUser.id, googleUser.photoUrl.toString(),
           googleUser.displayName.toString());
@@ -133,6 +156,7 @@ class _SignUpState extends State<SignUp> {
               headings: "Confirm Password",
             ),
             MyCustomTextfiled(
+              obsc: true,
               controller: authController.confirmPasswordController,
             ),
 
@@ -152,7 +176,7 @@ class _SignUpState extends State<SignUp> {
                   }   else if (authController.passwordController.text != authController.confirmPasswordController.text) {
                     CustomSnackbar.showFailure("Password and confirm password should be same");
                   } else {
-                    createUserWithEmailAndPassword(authController.emailController.text, authController.passwordController.text);
+                    createUserWithEmailAndPassword(authController.emailController.text, authController.passwordController.text,authController.nameController.text);
                   }
                 },
                 child:Obx(() {

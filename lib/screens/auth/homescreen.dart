@@ -4,6 +4,7 @@ import 'package:parkin/constants/colors.dart';
 import 'package:parkin/screens/auth/location_register.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../controller/jwt_controller.dart';
 import '../../widgets/custom_icon.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final authController = Get.put(JWTController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 30.0),
-            child: Text('Hello, User',
+            child: Text('Hello, ${authController.name??'User'}',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
@@ -174,7 +176,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Get.to(()=>LocRegister());
               },
               child: Text(
-                'Add your space',
+                authController.isSpaceRegistered.value?
+                'Check Status of your Space':'Add your Space',
                 style: TextStyle(
                   color: redColor,
                   fontWeight: FontWeight.bold
@@ -184,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Center(
             child: Padding(padding: EdgeInsets.only(top: 5),
-              child: Text('Do you wish to register your parking space?',
+              child: Text(authController.isSpaceRegistered.value?'Check Status of your space registration':'Do you wish to register your parking space?',
                 style: TextStyle(
                     fontSize: 14,
                     color: gray

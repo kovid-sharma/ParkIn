@@ -14,6 +14,10 @@ class JWTController extends GetxController{
   RxBool isAuth= false.obs;
   RxBool isUserRegistering = false.obs;
   String? userId;
+  String? name;
+  RxBool isSpaceRegistered=false.obs;
+  RxInt rows=10.obs;
+  RxInt cols=10.obs;
   var hiveBox = Hive.box("secrets");
   Future<String?> getUserId () async {
     if (userId != null) {
@@ -23,6 +27,15 @@ class JWTController extends GetxController{
     userId = await hiveBox.get("userId");
 
     return userId;
+  }
+  Future<String?> getName () async {
+    if (name != null) {
+      return name!;
+    }
+    debugPrint('Getting name');
+    name = await hiveBox.get("Name");
+
+    return name;
   }
   Future<void> pickDate(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
@@ -46,6 +59,7 @@ class JWTController extends GetxController{
   void onInit() async {
     super.onInit();
     userId ??= await getUserId();
+    name??=await getName();
     if (userId == null) {
       debugPrint("NO AUTH");
     } else {

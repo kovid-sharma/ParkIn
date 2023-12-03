@@ -57,6 +57,8 @@ class _HomePageState extends State<HomePage> {
   void initState()
   {
     super.initState();
+    authController.getName();
+    authController.getUserId();
     NavigateFromSplash();
   }
   @override
@@ -94,29 +96,71 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
 
-  @override
-  State<Home> createState() => _HomeState();
+
+class Seat {
+  final int row;
+  final int number;
+  bool isReserved;
+
+  Seat(this.row, this.number, this.isReserved);
 }
 
-class _HomeState extends State<Home> {
+class MyGrid extends StatefulWidget {
+  @override
+  _MyGridState createState() => _MyGridState();
+}
+
+class _MyGridState extends State<MyGrid> {
+  // Replace this with your actual seat data
+  final List<List<Seat>> seats = [
+    [Seat(1, 1, false), Seat(1, 2, false), Seat(1, 3, true)],
+    [Seat(2, 1, false), Seat(2, 2, false), Seat(2, 3, false)],
+    [Seat(3, 1, false), Seat(3, 2, false), Seat(3, 3, true)],
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backLightColor,
-      body: Center(
-        child: Text(
-          'ParkIn',
-          style: TextStyle(
-            color:redColor,
-            fontSize: 27,
-          ),
-        ),
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: seats[0].length,
+        childAspectRatio: 1.0, // Aspect ratio for square blocks
       ),
+      itemCount: seats.length * seats[0].length,
+      itemBuilder: (BuildContext context, int index) {
+        int row = index ~/ seats[0].length;
+        int col = index % seats[0].length;
+        Seat seat = seats[row][col];
+
+        return GestureDetector(
+          onTap: () {
+            // Add your seat selection logic here
+            if (!seat.isReserved) {
+              setState(() {
+                seat.isReserved = !seat.isReserved;
+              });
+            }
+          },
+          child: Container(
+            margin: EdgeInsets.all(0),
+            decoration: BoxDecoration(
+              color: seat.isReserved ? Colors.grey : Colors.green,
+              border: Border.all(),
+            ),
+            child: Center(
+              child: Text(
+                '${seat.row}-${seat.number}',
+                style: TextStyle(
+                  color: seat.isReserved ? Colors.white : Colors.black,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
+
 
 

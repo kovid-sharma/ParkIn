@@ -87,10 +87,13 @@ class _CommonAuthScreenState extends State<CommonAuthScreen>
                                     fontWeight: FontWeight.w600, fontSize: 16, color: Colors.redAccent),
                                 tabs: const [
                                   Tab(
-                                    text: "SIGN IN",
+                                    text: "   SIGN IN   ",
+                                    iconMargin: EdgeInsets.symmetric(horizontal: 10),
                                   ),
                                   Tab(
-                                    text: "SIGN UP",
+                                    text: "   SIGN UP    ",
+                                    iconMargin: EdgeInsets.symmetric(horizontal: 10),
+
                                   ),
                                   // Tab(text: 'Sign Up'),
                                 ],

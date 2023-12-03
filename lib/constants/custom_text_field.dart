@@ -6,12 +6,14 @@ class MyCustomTextfiled extends StatelessWidget {
   TextInputType? inputType;
   String? hint;
   int? maxLines;
+  bool? obsc;
   final Function? onTap;
   final Function(String text)? onChange;
 
   MyCustomTextfiled({
     Key? key,
     this.controller,
+    this.obsc,
     this.hint,
     this.maxLines = 1,
     this.onTap,
@@ -27,6 +29,7 @@ class MyCustomTextfiled extends StatelessWidget {
           borderRadius: BorderRadius.circular(10)),
       height: maxLines == 1 ? 44 : null,
       child: TextFormField(
+        obscureText: obsc??false,
         onTap: () {
           if (onTap==Null)
           {
